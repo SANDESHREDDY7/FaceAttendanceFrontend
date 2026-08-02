@@ -9,8 +9,7 @@ import {
   LinearProgress,
 } from "@mui/material";
 
-const API = "http://127.0.0.1:8000";
-
+const API = "https://ai-face-attendance-system-production-fc28.up.railway.app";
 function AttendanceChart() {
   const [stats, setStats] = useState({
     total_students: 0,

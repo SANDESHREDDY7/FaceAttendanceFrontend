@@ -20,8 +20,7 @@ interface Props {
   student: any;
 }
 
-const API = "http://127.0.0.1:8000";
-
+const API = "https://ai-face-attendance-system-production-fc28.up.railway.app";
 function UploadPhotoDialog({
   open,
   onClose,

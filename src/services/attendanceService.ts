@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API = "http://127.0.0.1:8000";
-
+const API = "https://ai-face-attendance-system-production-fc28.up.railway.app";
 export async function getTodayAttendance() {
   const response = await axios.get(
     `${API}/attendance/today`
