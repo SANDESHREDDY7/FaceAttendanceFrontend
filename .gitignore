@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local subfolders
+ai face attendence backend/
+ai face attendence frontend /

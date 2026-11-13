@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "https://ai-face-attendance-system-production-fc28.up.railway.app";
+const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 export async function getStudents() {
   const response = await axios.get(`${API}/students`);

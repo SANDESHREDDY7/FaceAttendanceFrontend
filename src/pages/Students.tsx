@@ -1,61 +1,101 @@
 import { useState } from "react";
-
-import {
-  Box,
-  Button,
-  Typography,
-} from "@mui/material";
-
-import AddIcon from "@mui/icons-material/Add";
+import { Box, Button, Typography, Chip } from "@mui/material";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 
 import SearchBar from "../components/students/SearchBar";
 import StudentTable from "../components/students/StudentTable";
 import StudentDialog from "../components/students/StudentDialog";
+import { useColorMode } from "../theme/ThemeContext";
 
 function Students() {
+  const { mode } = useColorMode();
+  const isDark = mode === "dark";
+
   const [openDialog, setOpenDialog] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedClass, setSelectedClass] = useState("All");
 
   return (
-    <Box>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 3.5, pb: 4 }}>
+      {/* Page Title & Add Button */}
       <Box
         sx={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          mb: 4,
+          flexWrap: "wrap",
+          gap: 2,
         }}
       >
         <Box>
-          <Typography variant="h4" fontWeight="bold">
-            Students
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: 800,
+              background: isDark
+                ? "linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 100%)"
+                : "linear-gradient(180deg, #0F172A 0%, #334155 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Student Roster
           </Typography>
-
-          <Typography color="text.secondary">
-            Manage all students in the system
+          <Typography variant="body1" sx={{ color: isDark ? "#94A3B8" : "#64748B", mt: 0.5 }}>
+            Enroll students and configure 128-d biometric facial landmarks.
           </Typography>
         </Box>
 
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={() => setOpenDialog(true)}
-          sx={{
-            borderRadius: 2,
-            px: 3,
-            py: 1.3,
-          }}
-        >
-          Add Student
-        </Button>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <Chip
+            icon={<GroupsRoundedIcon sx={{ fontSize: "16px !important", color: isDark ? "#38BDF8 !important" : "#0284C7 !important" }} />}
+            label="Biometric Enrollment Active"
+            sx={{
+              background: isDark ? "rgba(56, 189, 248, 0.1)" : "rgba(2, 132, 199, 0.08)",
+              border: isDark ? "1px solid rgba(56, 189, 248, 0.3)" : "1px solid rgba(2, 132, 199, 0.25)",
+              color: isDark ? "#38BDF8" : "#0284C7",
+              fontWeight: 700,
+            }}
+          />
+
+          <Button
+            variant="contained"
+            startIcon={<AddRoundedIcon />}
+            onClick={() => setOpenDialog(true)}
+            sx={{
+              background: isDark
+                ? "linear-gradient(135deg, #38BDF8 0%, #6366F1 100%)"
+                : "linear-gradient(135deg, #0284C7 0%, #4F46E5 100%)",
+              color: "#FFFFFF",
+              fontWeight: 700,
+              px: 3,
+              py: 1.2,
+            }}
+          >
+            Add Student
+          </Button>
+        </Box>
       </Box>
 
-      <SearchBar />
+      {/* Filter and Search Bar */}
+      <SearchBar
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        selectedClass={selectedClass}
+        onClassChange={setSelectedClass}
+      />
 
-      <Box mt={3}>
-        <StudentTable key={refreshKey} />
-      </Box>
+      {/* Modern Student Table */}
+      <StudentTable
+        key={refreshKey}
+        searchTerm={searchTerm}
+        selectedClass={selectedClass}
+      />
 
+      {/* Enrollment Dialog */}
       <StudentDialog
         open={openDialog}
         onClose={() => setOpenDialog(false)}

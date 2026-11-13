@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import DashboardHeader from "../components/dashboard/DashboardHeader";
 import StatsCards from "../components/dashboard/StatsCards";
 import AttendanceChart from "../components/dashboard/AttendanceChart";
@@ -7,40 +8,29 @@ import AttendanceTable from "../components/dashboard/AttendanceTable";
 
 function Dashboard() {
   return (
-    <>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 3.5, pb: 4 }}>
       <DashboardHeader />
 
       <StatsCards />
 
-      <div
-        style={{
+      {/* Middle row: Analytics and Recent Activity */}
+      <Box
+        sx={{
           display: "grid",
-          gridTemplateColumns: "2fr 1fr",
-          gap: "20px",
-          marginTop: "25px",
+          gridTemplateColumns: { xs: "1fr", lg: "1.8fr 1.2fr" },
+          gap: 3,
         }}
       >
         <AttendanceChart />
-
         <RecentActivity />
-      </div>
+      </Box>
 
-      <div
-        style={{
-          marginTop: "25px",
-        }}
-      >
-        <QuickActions />
-      </div>
+      {/* Quick operational actions */}
+      <QuickActions />
 
-      <div
-        style={{
-          marginTop: "25px",
-        }}
-      >
-        <AttendanceTable />
-      </div>
-    </>
+      {/* Today's verified attendance table */}
+      <AttendanceTable />
+    </Box>
   );
 }
 
