@@ -8,8 +8,7 @@ import {
 } from "@mui/icons-material";
 import { Box, Card, CardContent, Typography, Chip } from "@mui/material";
 import { useColorMode } from "../../theme/ThemeContext";
-
-const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
+import { API } from "../../config";
 
 function StatsCards() {
   const { mode } = useColorMode();

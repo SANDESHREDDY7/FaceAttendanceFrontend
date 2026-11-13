@@ -213,10 +213,12 @@ function StudentDialog({ open, onClose, onSaved }: Props) {
 
       <Snackbar
         open={snack.open}
-        autoHideDuration={3000}
+        autoHideDuration={4000}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
         onClose={() => setSnack({ ...snack, open: false })}
+        sx={{ zIndex: 99999 }}
       >
-        <Alert severity={snack.severity} variant="filled" sx={{ borderRadius: "12px" }}>
+        <Alert severity={snack.severity} variant="filled" sx={{ borderRadius: "12px", boxShadow: "0 8px 30px rgba(0,0,0,0.3)" }}>
           {snack.message}
         </Alert>
       </Snackbar>

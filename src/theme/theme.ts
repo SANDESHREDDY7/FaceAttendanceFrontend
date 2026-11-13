@@ -243,6 +243,25 @@ export function getAppTheme(mode: "light" | "dark") {
           },
         },
       },
+      MuiSnackbar: {
+        defaultProps: {
+          anchorOrigin: { vertical: "top", horizontal: "right" },
+        },
+        styleOverrides: {
+          root: {
+            zIndex: 99999,
+          },
+        },
+      },
+      MuiAlert: {
+        styleOverrides: {
+          root: {
+            borderRadius: 14,
+            fontWeight: 600,
+            boxShadow: isDark ? "0 8px 30px rgba(0, 0, 0, 0.5)" : "0 8px 30px rgba(0, 0, 0, 0.12)",
+          },
+        },
+      },
     },
   });
 }

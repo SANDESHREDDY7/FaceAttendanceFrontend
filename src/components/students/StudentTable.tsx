@@ -379,10 +379,12 @@ function StudentTable({ searchTerm = "", selectedClass = "All" }: Props) {
 
       <Snackbar
         open={snackbar.open}
-        autoHideDuration={3000}
+        autoHideDuration={4000}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
         onClose={() => setSnackbar({ ...snackbar, open: false })}
+        sx={{ zIndex: 99999 }}
       >
-        <Alert severity={snackbar.severity} variant="filled" sx={{ borderRadius: "12px" }}>
+        <Alert severity={snackbar.severity} variant="filled" sx={{ borderRadius: "12px", boxShadow: "0 8px 30px rgba(0,0,0,0.3)" }}>
           {snackbar.message}
         </Alert>
       </Snackbar>

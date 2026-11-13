@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
+import { API } from "../config";
 export async function getTodayAttendance() {
   const response = await axios.get(
     `${API}/attendance/today`

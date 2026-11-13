@@ -26,8 +26,7 @@ import {
   CheckCircleRounded,
 } from "@mui/icons-material";
 import { useColorMode } from "../theme/ThemeContext";
-
-const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
+import { API } from "../config";
 
 function Reports() {
   const { mode } = useColorMode();

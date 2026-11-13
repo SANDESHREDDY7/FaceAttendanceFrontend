@@ -20,8 +20,7 @@ import {
   SaveRounded,
 } from "@mui/icons-material";
 import { useColorMode } from "../theme/ThemeContext";
-
-const API = import.meta.env.VITE_API_URL || "http://localhost:8000";
+import { API } from "../config";
 
 function Settings() {
   const { mode } = useColorMode();
@@ -319,10 +318,12 @@ function Settings() {
 
       <Snackbar
         open={snack}
-        autoHideDuration={3000}
+        autoHideDuration={4000}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
         onClose={() => setSnack(false)}
+        sx={{ zIndex: 99999 }}
       >
-        <Alert severity="success" variant="filled" sx={{ borderRadius: "12px" }}>
+        <Alert severity="success" variant="filled" sx={{ borderRadius: "12px", boxShadow: "0 8px 30px rgba(0,0,0,0.3)" }}>
           System parameters updated successfully!
         </Alert>
       </Snackbar>
