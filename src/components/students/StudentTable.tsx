@@ -135,18 +135,19 @@ function StudentTable({ searchTerm = "", selectedClass = "All" }: Props) {
             </Typography>
           </Box>
         ) : (
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Student</TableCell>
-                <TableCell>Roll Number</TableCell>
-                <TableCell>Class & Section</TableCell>
-                <TableCell>Biometric Status</TableCell>
-                <TableCell align="center">Actions</TableCell>
-              </TableRow>
-            </TableHead>
+          <Box sx={{ overflowX: "auto", width: "100%", WebkitOverflowScrolling: "touch" }}>
+            <Table sx={{ minWidth: 640 }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Student</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Roll Number</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Class & Section</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Biometric Status</TableCell>
+                  <TableCell align="center" sx={{ whiteSpace: "nowrap" }}>Actions</TableCell>
+                </TableRow>
+              </TableHead>
 
-            <TableBody>
+              <TableBody>
               {filteredStudents.map((student) => {
                 const isEncoded = Boolean(student.is_encoded);
 
@@ -324,7 +325,8 @@ function StudentTable({ searchTerm = "", selectedClass = "All" }: Props) {
               })}
             </TableBody>
           </Table>
-        )}
+        </Box>
+      )}
       </Paper>
 
       {/* Delete Confirmation Modal */}

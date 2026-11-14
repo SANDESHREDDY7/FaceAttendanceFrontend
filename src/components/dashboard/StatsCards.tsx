@@ -39,7 +39,7 @@ function StatsCards() {
       title: "Total Students",
       value: stats.total_students,
       tag: "Enrolled Roster",
-      icon: <SchoolRounded sx={{ fontSize: 26 }} />,
+      icon: <SchoolRounded sx={{ fontSize: 24 }} />,
       glowColor: isDark ? "rgba(56, 189, 248, 0.15)" : "rgba(2, 132, 199, 0.08)",
       borderColor: isDark ? "rgba(56, 189, 248, 0.25)" : "rgba(2, 132, 199, 0.2)",
       iconColor: isDark ? "#38BDF8" : "#0284C7",
@@ -49,7 +49,7 @@ function StatsCards() {
       title: "Present Today",
       value: stats.present_today,
       tag: stats.total_students > 0 ? `${Math.round((stats.present_today / stats.total_students) * 100)}% of total` : "Live",
-      icon: <CheckCircleRounded sx={{ fontSize: 26 }} />,
+      icon: <CheckCircleRounded sx={{ fontSize: 24 }} />,
       glowColor: isDark ? "rgba(16, 185, 129, 0.15)" : "rgba(5, 150, 105, 0.08)",
       borderColor: isDark ? "rgba(16, 185, 129, 0.25)" : "rgba(5, 150, 105, 0.2)",
       iconColor: isDark ? "#10B981" : "#059669",
@@ -59,7 +59,7 @@ function StatsCards() {
       title: "Absent Today",
       value: stats.absent_today,
       tag: stats.absent_today > 0 ? "Pending log" : "No absentees",
-      icon: <CancelRounded sx={{ fontSize: 26 }} />,
+      icon: <CancelRounded sx={{ fontSize: 24 }} />,
       glowColor: isDark ? "rgba(244, 63, 94, 0.15)" : "rgba(225, 29, 72, 0.08)",
       borderColor: isDark ? "rgba(244, 63, 94, 0.25)" : "rgba(225, 29, 72, 0.2)",
       iconColor: isDark ? "#F43F5E" : "#E11D48",
@@ -69,7 +69,7 @@ function StatsCards() {
       title: "Attendance Rate",
       value: `${stats.attendance_rate}%`,
       tag: stats.attendance_rate >= 75 ? "Optimal rate" : "Below target",
-      icon: <TrendingUpRounded sx={{ fontSize: 26 }} />,
+      icon: <TrendingUpRounded sx={{ fontSize: 24 }} />,
       glowColor: isDark ? "rgba(129, 140, 248, 0.15)" : "rgba(79, 70, 229, 0.08)",
       borderColor: isDark ? "rgba(129, 140, 248, 0.25)" : "rgba(79, 70, 229, 0.2)",
       iconColor: isDark ? "#818CF8" : "#4F46E5",
@@ -83,10 +83,10 @@ function StatsCards() {
         display: "grid",
         gridTemplateColumns: {
           xs: "1fr",
-          sm: "1fr 1fr",
+          sm: "repeat(2, 1fr)",
           lg: "repeat(4, 1fr)",
         },
-        gap: 2.5,
+        gap: { xs: 2, sm: 2.5 },
       }}
     >
       {cards.map((card) => (
@@ -107,19 +107,19 @@ function StatsCards() {
             },
           }}
         >
-          <CardContent sx={{ p: 3 }}>
+          <CardContent sx={{ p: { xs: 2, sm: 2.5, md: 3 } }}>
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "flex-start",
-                mb: 2.5,
+                mb: 2,
               }}
             >
               <Box
                 sx={{
-                  width: 48,
-                  height: 48,
+                  width: { xs: 42, md: 48 },
+                  height: { xs: 42, md: 48 },
                   borderRadius: "14px",
                   display: "flex",
                   alignItems: "center",
@@ -136,8 +136,8 @@ function StatsCards() {
                 label={card.tag}
                 size="small"
                 sx={{
-                  height: 24,
-                  fontSize: "0.72rem",
+                  height: 22,
+                  fontSize: "0.7rem",
                   fontWeight: 600,
                   background: isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.04)",
                   border: isDark ? "1px solid rgba(255, 255, 255, 0.08)" : "1px solid rgba(0, 0, 0, 0.06)",
@@ -155,6 +155,7 @@ function StatsCards() {
                 letterSpacing: "0.05em",
                 display: "block",
                 mb: 0.5,
+                fontSize: "0.72rem",
               }}
             >
               {card.title}
@@ -166,7 +167,7 @@ function StatsCards() {
                 fontWeight: 800,
                 color: isDark ? "#F8FAFC" : "#0F172A",
                 letterSpacing: "-0.03em",
-                fontSize: { xs: "2rem", md: "2.3rem" },
+                fontSize: { xs: "1.8rem", sm: "2rem", md: "2.3rem" },
               }}
             >
               {card.value}

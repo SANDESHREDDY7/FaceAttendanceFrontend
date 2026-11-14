@@ -94,12 +94,21 @@ function Reports() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 3.5, pb: 4 }}>
       {/* Title & Actions */}
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: { xs: "flex-start", sm: "center" },
+          flexDirection: { xs: "column", sm: "row" },
+          gap: 2,
+        }}
+      >
         <Box>
           <Typography
             variant="h4"
             sx={{
               fontWeight: 800,
+              fontSize: { xs: "1.6rem", sm: "1.9rem", md: "2.125rem" },
               background: isDark
                 ? "linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 100%)"
                 : "linear-gradient(180deg, #0F172A 0%, #334155 100%)",
@@ -110,7 +119,7 @@ function Reports() {
           >
             Attendance Logs & Audit Trail
           </Typography>
-          <Typography variant="body1" sx={{ color: isDark ? "#94A3B8" : "#64748B", mt: 0.5 }}>
+          <Typography variant="body1" sx={{ color: isDark ? "#94A3B8" : "#64748B", mt: 0.5, fontSize: { xs: "0.85rem", sm: "0.95rem" } }}>
             Exportable historical records with facial match confidence metadata.
           </Typography>
         </Box>
@@ -128,6 +137,7 @@ function Reports() {
             fontWeight: 700,
             px: 3,
             py: 1.2,
+            width: { xs: "100%", sm: "auto" },
           }}
         >
           Export CSV Log
@@ -240,20 +250,21 @@ function Reports() {
             </Typography>
           </Box>
         ) : (
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Student</TableCell>
-                <TableCell>Roll Number</TableCell>
-                <TableCell>Class & Section</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell>Time</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Confidence Score</TableCell>
-              </TableRow>
-            </TableHead>
+          <Box sx={{ overflowX: "auto", width: "100%", WebkitOverflowScrolling: "touch" }}>
+            <Table sx={{ minWidth: 700 }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Student</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Roll Number</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Class & Section</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Date</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Time</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Status</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Confidence Score</TableCell>
+                </TableRow>
+              </TableHead>
 
-            <TableBody>
+              <TableBody>
               {filteredRecords.map((record: any, index: number) => {
                 const student = record.students || {};
                 const confidence = Number(record.confidence || 0);
@@ -354,7 +365,8 @@ function Reports() {
               })}
             </TableBody>
           </Table>
-        )}
+        </Box>
+      )}
       </Paper>
     </Box>
   );

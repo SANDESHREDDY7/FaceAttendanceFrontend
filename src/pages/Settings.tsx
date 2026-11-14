@@ -45,12 +45,21 @@ function Settings() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 3.5, pb: 4, maxWidth: 900 }}>
       {/* Title */}
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: { xs: "flex-start", sm: "center" },
+          flexDirection: { xs: "column", sm: "row" },
+          gap: 2,
+        }}
+      >
         <Box>
           <Typography
             variant="h4"
             sx={{
               fontWeight: 800,
+              fontSize: { xs: "1.6rem", sm: "1.9rem", md: "2.125rem" },
               background: isDark
                 ? "linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 100%)"
                 : "linear-gradient(180deg, #0F172A 0%, #334155 100%)",
@@ -61,7 +70,7 @@ function Settings() {
           >
             System & AI Parameters
           </Typography>
-          <Typography variant="body1" sx={{ color: isDark ? "#94A3B8" : "#64748B", mt: 0.5 }}>
+          <Typography variant="body1" sx={{ color: isDark ? "#94A3B8" : "#64748B", mt: 0.5, fontSize: { xs: "0.85rem", sm: "0.95rem" } }}>
             Configure recognition sensitivity, database routes, and localization.
           </Typography>
         </Box>
@@ -78,6 +87,7 @@ function Settings() {
             fontWeight: 700,
             px: 3,
             py: 1.2,
+            width: { xs: "100%", sm: "auto" },
           }}
         >
           Save Changes

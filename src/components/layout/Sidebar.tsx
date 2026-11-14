@@ -6,9 +6,10 @@ import {
   SettingsRounded,
   CenterFocusStrongRounded,
   FiberManualRecordRounded,
+  CloseRounded,
 } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
-import { Box, Typography, Avatar } from "@mui/material";
+import { Box, Typography, Avatar, IconButton } from "@mui/material";
 import { useColorMode } from "../../theme/ThemeContext";
 
 const menuItems = [
@@ -39,7 +40,11 @@ const menuItems = [
   },
 ];
 
-function Sidebar() {
+interface SidebarProps {
+  onClose?: () => void;
+}
+
+function Sidebar({ onClose }: SidebarProps) {
   const { mode } = useColorMode();
   const isDark = mode === "dark";
 
@@ -47,15 +52,15 @@ function Sidebar() {
     <Box
       sx={{
         width: 270,
-        height: "100vh",
-        background: isDark ? "rgba(11, 15, 23, 0.95)" : "#FFFFFF",
+        height: "100%",
+        minHeight: "100vh",
+        background: isDark ? "rgba(11, 15, 23, 0.98)" : "#FFFFFF",
         backdropFilter: "blur(20px)",
         borderRight: isDark ? "1px solid rgba(255, 255, 255, 0.08)" : "1px solid rgba(0, 0, 0, 0.08)",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
         transition: "background-color 0.25s ease, border-color 0.25s ease",
-        zIndex: 20,
       }}
     >
       <Box>
@@ -66,59 +71,77 @@ function Sidebar() {
             pb: 2.5,
             display: "flex",
             alignItems: "center",
-            gap: 1.5,
+            justifyContent: "space-between",
             borderBottom: isDark ? "1px solid rgba(255, 255, 255, 0.06)" : "1px solid rgba(0, 0, 0, 0.06)",
           }}
         >
-          <Box
-            sx={{
-              width: 42,
-              height: 42,
-              borderRadius: "12px",
-              background: isDark
-                ? "linear-gradient(135deg, #38BDF8 0%, #6366F1 100%)"
-                : "linear-gradient(135deg, #0284C7 0%, #4F46E5 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#FFFFFF",
-              boxShadow: isDark
-                ? "0 0 20px rgba(56, 189, 248, 0.35)"
-                : "0 4px 14px rgba(2, 132, 199, 0.25)",
-            }}
-          >
-            <CenterFocusStrongRounded sx={{ fontSize: 26 }} />
-          </Box>
-          <Box>
-            <Typography
-              variant="h6"
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+            <Box
               sx={{
-                fontWeight: 800,
-                fontSize: "1.05rem",
-                letterSpacing: "-0.01em",
+                width: 42,
+                height: 42,
+                borderRadius: "12px",
                 background: isDark
-                  ? "linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%)"
-                  : "linear-gradient(180deg, #0F172A 0%, #334155 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              FaceAttend AI
-            </Typography>
-            <Typography
-              variant="caption"
-              sx={{
-                color: isDark ? "#38BDF8" : "#0284C7",
-                fontWeight: 600,
-                fontSize: "0.72rem",
+                  ? "linear-gradient(135deg, #38BDF8 0%, #6366F1 100%)"
+                  : "linear-gradient(135deg, #0284C7 0%, #4F46E5 100%)",
                 display: "flex",
                 alignItems: "center",
-                gap: 0.5,
+                justifyContent: "center",
+                color: "#FFFFFF",
+                boxShadow: isDark
+                  ? "0 0 20px rgba(56, 189, 248, 0.35)"
+                  : "0 4px 14px rgba(2, 132, 199, 0.25)",
               }}
             >
-              <FiberManualRecordRounded sx={{ fontSize: 8 }} /> Biometric v2.0
-            </Typography>
+              <CenterFocusStrongRounded sx={{ fontSize: 26 }} />
+            </Box>
+            <Box>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 800,
+                  fontSize: "1.05rem",
+                  letterSpacing: "-0.01em",
+                  background: isDark
+                    ? "linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%)"
+                    : "linear-gradient(180deg, #0F172A 0%, #334155 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                FaceAttend AI
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  color: isDark ? "#38BDF8" : "#0284C7",
+                  fontWeight: 600,
+                  fontSize: "0.72rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 0.5,
+                }}
+              >
+                <FiberManualRecordRounded sx={{ fontSize: 8 }} /> Biometric v2.0
+              </Typography>
+            </Box>
           </Box>
+
+          {/* Close button for mobile drawer */}
+          {onClose && (
+            <IconButton
+              onClick={onClose}
+              size="small"
+              sx={{
+                display: { xs: "flex", md: "none" },
+                color: isDark ? "#94A3B8" : "#64748B",
+                background: isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.04)",
+                borderRadius: "8px",
+              }}
+            >
+              <CloseRounded sx={{ fontSize: 20 }} />
+            </IconButton>
+          )}
         </Box>
 
         {/* Navigation Section */}
@@ -143,6 +166,7 @@ function Sidebar() {
             <NavLink
               key={item.title}
               to={item.path}
+              onClick={() => onClose?.()}
               style={{ textDecoration: "none" }}
             >
               {({ isActive }) => (

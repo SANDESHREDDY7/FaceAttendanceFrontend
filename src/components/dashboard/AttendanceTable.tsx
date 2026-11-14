@@ -51,13 +51,15 @@ function AttendanceTable() {
         overflow: "hidden",
       }}
     >
-      <CardContent sx={{ p: 3 }}>
+      <CardContent sx={{ p: { xs: 2, sm: 2.5, md: 3 } }}>
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            mb: 3,
+            mb: 2.5,
+            flexWrap: "wrap",
+            gap: 1.5,
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
@@ -76,10 +78,10 @@ function AttendanceTable() {
               <TableChartRounded sx={{ fontSize: 20 }} />
             </Box>
             <Box>
-              <Typography variant="h6" sx={{ fontWeight: 700, fontSize: "1.05rem", color: isDark ? "#F8FAFC" : "#0F172A" }}>
+              <Typography variant="h6" sx={{ fontWeight: 700, fontSize: { xs: "0.95rem", sm: "1.05rem" }, color: isDark ? "#F8FAFC" : "#0F172A" }}>
                 Today's Verified Attendance
               </Typography>
-              <Typography variant="caption" sx={{ color: isDark ? "#94A3B8" : "#64748B" }}>
+              <Typography variant="caption" sx={{ color: isDark ? "#94A3B8" : "#64748B", display: { xs: "none", sm: "block" } }}>
                 Real-time synchronized student records
               </Typography>
             </Box>
@@ -111,16 +113,16 @@ function AttendanceTable() {
             </Typography>
           </Box>
         ) : (
-          <Box sx={{ overflowX: "auto" }}>
-            <Table>
+          <Box sx={{ overflowX: "auto", width: "100%", WebkitOverflowScrolling: "touch" }}>
+            <Table sx={{ minWidth: 600 }}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Student</TableCell>
-                  <TableCell>Roll Number</TableCell>
-                  <TableCell>Class & Section</TableCell>
-                  <TableCell>Check-in Time</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell>Confidence Score</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Student</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Roll Number</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Class & Section</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Check-in Time</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Status</TableCell>
+                  <TableCell sx={{ whiteSpace: "nowrap" }}>Confidence Score</TableCell>
                 </TableRow>
               </TableHead>
 
@@ -131,16 +133,16 @@ function AttendanceTable() {
 
                   return (
                     <TableRow key={index}>
-                      <TableCell>
+                      <TableCell sx={{ whiteSpace: "nowrap" }}>
                         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
                           <Avatar
                             sx={{
-                              width: 36,
-                              height: 36,
+                              width: 34,
+                              height: 34,
                               background: isDark
                                 ? "linear-gradient(135deg, #38BDF8, #6366F1)"
                                 : "linear-gradient(135deg, #0284C7, #4F46E5)",
-                              fontSize: "0.85rem",
+                              fontSize: "0.82rem",
                               fontWeight: 700,
                               color: "#FFFFFF",
                             }}
@@ -155,7 +157,7 @@ function AttendanceTable() {
                         </Box>
                       </TableCell>
 
-                      <TableCell>
+                      <TableCell sx={{ whiteSpace: "nowrap" }}>
                         <Chip
                           label={student.roll_number || "-"}
                           size="small"
@@ -168,19 +170,19 @@ function AttendanceTable() {
                         />
                       </TableCell>
 
-                      <TableCell>
+                      <TableCell sx={{ whiteSpace: "nowrap" }}>
                         <Typography variant="body2" sx={{ color: isDark ? "#94A3B8" : "#64748B", fontWeight: 500 }}>
                           {student.class} - {student.section}
                         </Typography>
                       </TableCell>
 
-                      <TableCell>
+                      <TableCell sx={{ whiteSpace: "nowrap" }}>
                         <Typography variant="body2" sx={{ color: isDark ? "#94A3B8" : "#64748B", fontFamily: "'JetBrains Mono', monospace" }}>
                           {record.attendance_time}
                         </Typography>
                       </TableCell>
 
-                      <TableCell>
+                      <TableCell sx={{ whiteSpace: "nowrap" }}>
                         <Chip
                           label={record.status}
                           size="small"
@@ -193,8 +195,8 @@ function AttendanceTable() {
                         />
                       </TableCell>
 
-                      <TableCell>
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, minWidth: 140 }}>
+                      <TableCell sx={{ whiteSpace: "nowrap" }}>
+                        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, minWidth: 130 }}>
                           <LinearProgress
                             variant="determinate"
                             value={Math.min(confidence, 100)}
@@ -217,7 +219,7 @@ function AttendanceTable() {
                               fontFamily: "'JetBrains Mono', monospace",
                               fontWeight: 700,
                               color: isDark ? "#38BDF8" : "#0284C7",
-                              minWidth: 45,
+                              minWidth: 42,
                             }}
                           >
                             {confidence.toFixed(1)}%

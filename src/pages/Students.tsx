@@ -24,8 +24,8 @@ function Students() {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
+          alignItems: { xs: "flex-start", sm: "center" },
+          flexDirection: { xs: "column", sm: "row" },
           gap: 2,
         }}
       >
@@ -34,6 +34,7 @@ function Students() {
             variant="h4"
             sx={{
               fontWeight: 800,
+              fontSize: { xs: "1.6rem", sm: "1.9rem", md: "2.125rem" },
               background: isDark
                 ? "linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 100%)"
                 : "linear-gradient(180deg, #0F172A 0%, #334155 100%)",
@@ -44,20 +45,23 @@ function Students() {
           >
             Student Roster
           </Typography>
-          <Typography variant="body1" sx={{ color: isDark ? "#94A3B8" : "#64748B", mt: 0.5 }}>
+          <Typography variant="body1" sx={{ color: isDark ? "#94A3B8" : "#64748B", mt: 0.5, fontSize: { xs: "0.85rem", sm: "0.95rem" } }}>
             Enroll students and configure 128-d biometric facial landmarks.
           </Typography>
         </Box>
 
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, width: { xs: "100%", sm: "auto" }, justifyContent: { xs: "space-between", sm: "flex-end" } }}>
           <Chip
             icon={<GroupsRoundedIcon sx={{ fontSize: "16px !important", color: isDark ? "#38BDF8 !important" : "#0284C7 !important" }} />}
-            label="Biometric Enrollment Active"
+            label="Biometric Active"
+            size="small"
             sx={{
+              display: { xs: "none", sm: "inline-flex" },
               background: isDark ? "rgba(56, 189, 248, 0.1)" : "rgba(2, 132, 199, 0.08)",
               border: isDark ? "1px solid rgba(56, 189, 248, 0.3)" : "1px solid rgba(2, 132, 199, 0.25)",
               color: isDark ? "#38BDF8" : "#0284C7",
               fontWeight: 700,
+              height: 36,
             }}
           />
 
@@ -73,6 +77,7 @@ function Students() {
               fontWeight: 700,
               px: 3,
               py: 1.2,
+              width: { xs: "100%", sm: "auto" },
             }}
           >
             Add Student

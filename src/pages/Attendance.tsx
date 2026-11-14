@@ -470,18 +470,19 @@ function Attendance() {
               <Typography variant="body2">No students marked in this session yet.</Typography>
             </Box>
           ) : (
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Student</TableCell>
-                  <TableCell>Roll Number</TableCell>
-                  <TableCell>Class</TableCell>
-                  <TableCell>Section</TableCell>
-                  <TableCell>Confidence</TableCell>
-                  <TableCell>Attendance Status</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
+            <Box sx={{ overflowX: "auto", width: "100%", WebkitOverflowScrolling: "touch" }}>
+              <Table sx={{ minWidth: 600 }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell sx={{ whiteSpace: "nowrap" }}>Student</TableCell>
+                    <TableCell sx={{ whiteSpace: "nowrap" }}>Roll Number</TableCell>
+                    <TableCell sx={{ whiteSpace: "nowrap" }}>Class</TableCell>
+                    <TableCell sx={{ whiteSpace: "nowrap" }}>Section</TableCell>
+                    <TableCell sx={{ whiteSpace: "nowrap" }}>Confidence</TableCell>
+                    <TableCell sx={{ whiteSpace: "nowrap" }}>Attendance Status</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
                 {recognizedStudents.map((record: any, index: number) => {
                   const student = record.student;
                   const confidence = Number(record.confidence || 0);
@@ -548,7 +549,8 @@ function Attendance() {
                 })}
               </TableBody>
             </Table>
-          )}
+          </Box>
+        )}
         </CardContent>
       </Card>
 

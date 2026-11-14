@@ -2,20 +2,25 @@ import {
   NotificationsNoneRounded,
   SearchRounded,
   BoltRounded,
+  MenuRounded,
 } from "@mui/icons-material";
 import { Box, Typography, IconButton, Badge, Chip, Avatar } from "@mui/material";
 import ThemeToggle from "../common/ThemeToggle";
 import { useColorMode } from "../../theme/ThemeContext";
 
-function Topbar() {
+interface TopbarProps {
+  onToggleSidebar?: () => void;
+}
+
+function Topbar({ onToggleSidebar }: TopbarProps) {
   const { mode } = useColorMode();
   const isDark = mode === "dark";
 
   return (
     <Box
       sx={{
-        height: 72,
-        px: 4,
+        height: { xs: 64, md: 72 },
+        px: { xs: 2, sm: 3, md: 4 },
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
@@ -26,11 +31,32 @@ function Topbar() {
         zIndex: 10,
       }}
     >
-      {/* Left: System Status & Search */}
-      <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+      {/* Left: Mobile Menu Toggle & System Status / Search */}
+      <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 1.5, sm: 2 } }}>
+        {/* Mobile Hamburger Button */}
+        <IconButton
+          onClick={onToggleSidebar}
+          size="medium"
+          aria-label="open navigation menu"
+          sx={{
+            display: { xs: "flex", md: "none" },
+            color: isDark ? "#F8FAFC" : "#0F172A",
+            background: isDark ? "rgba(255, 255, 255, 0.04)" : "rgba(0, 0, 0, 0.04)",
+            border: isDark ? "1px solid rgba(255, 255, 255, 0.08)" : "1px solid rgba(0, 0, 0, 0.08)",
+            borderRadius: "10px",
+            p: 1,
+            "&:hover": {
+              background: isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.08)",
+            },
+          }}
+        >
+          <MenuRounded sx={{ fontSize: 22 }} />
+        </IconButton>
+
+        {/* Search Bar - hidden on mobile, shown on tablet & desktop */}
         <Box
           sx={{
-            display: "flex",
+            display: { xs: "none", md: "flex" },
             alignItems: "center",
             gap: 1.5,
             px: 2,
@@ -39,7 +65,7 @@ function Topbar() {
             background: isDark ? "rgba(255, 255, 255, 0.03)" : "rgba(0, 0, 0, 0.03)",
             border: isDark ? "1px solid rgba(255, 255, 255, 0.06)" : "1px solid rgba(0, 0, 0, 0.08)",
             color: isDark ? "#94A3B8" : "#64748B",
-            width: 280,
+            width: { md: 220, lg: 280 },
             cursor: "pointer",
             "&:hover": {
               borderColor: isDark ? "rgba(56, 189, 248, 0.3)" : "rgba(2, 132, 199, 0.3)",
@@ -68,11 +94,13 @@ function Topbar() {
           </Typography>
         </Box>
 
+        {/* AI Model Chip - hidden on small phone screens */}
         <Chip
           icon={<BoltRounded sx={{ fontSize: "16px !important", color: isDark ? "#10B981 !important" : "#059669 !important" }} />}
-          label="AI Model Online • 0.46 Thresh"
+          label="AI Model Online"
           size="small"
           sx={{
+            display: { xs: "none", sm: "inline-flex" },
             background: isDark ? "rgba(16, 185, 129, 0.1)" : "rgba(16, 185, 129, 0.08)",
             border: isDark ? "1px solid rgba(16, 185, 129, 0.25)" : "1px solid rgba(16, 185, 129, 0.3)",
             color: isDark ? "#34D399" : "#059669",
@@ -83,7 +111,7 @@ function Topbar() {
       </Box>
 
       {/* Right: Actions, Theme Toggle & Admin Profile */}
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+      <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 1, sm: 1.5 } }}>
         {/* Global Light / Dark Mode Toggle */}
         <ThemeToggle variant="icon" />
 
@@ -93,6 +121,7 @@ function Topbar() {
             background: isDark ? "rgba(255, 255, 255, 0.03)" : "rgba(0, 0, 0, 0.03)",
             border: isDark ? "1px solid rgba(255, 255, 255, 0.06)" : "1px solid rgba(0, 0, 0, 0.08)",
             borderRadius: "10px",
+            p: 1,
             "&:hover": {
               color: isDark ? "#38BDF8" : "#0284C7",
               background: isDark ? "rgba(56, 189, 248, 0.08)" : "rgba(2, 132, 199, 0.06)",
@@ -108,7 +137,7 @@ function Topbar() {
               },
             }}
           >
-            <NotificationsNoneRounded sx={{ fontSize: 21 }} />
+            <NotificationsNoneRounded sx={{ fontSize: 20 }} />
           </Badge>
         </IconButton>
 
@@ -117,7 +146,7 @@ function Topbar() {
             display: "flex",
             alignItems: "center",
             gap: 1.5,
-            pl: 1.5,
+            pl: { xs: 1, sm: 1.5 },
             borderLeft: isDark ? "1px solid rgba(255, 255, 255, 0.08)" : "1px solid rgba(0, 0, 0, 0.08)",
           }}
         >
@@ -135,7 +164,7 @@ function Topbar() {
           >
             A
           </Avatar>
-          <Box sx={{ display: { xs: "none", md: "block" } }}>
+          <Box sx={{ display: { xs: "none", lg: "block" } }}>
             <Typography variant="body2" sx={{ fontWeight: 700, fontSize: "0.85rem", lineHeight: 1.2, color: isDark ? "#F8FAFC" : "#0F172A" }}>
               Admin User
             </Typography>
